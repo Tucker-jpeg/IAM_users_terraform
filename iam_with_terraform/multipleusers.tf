@@ -3,7 +3,7 @@ There are different ways to create multiple IAM users.
 We could copy and paste the resource block from our first user and give the subsequent blocks new names. However, this causes repetition of code and can be very inefficient for creating many users, as we would need to manually adjust the name for each user.
 The count meta-argument can be used to copy and create a resource as many times as you define. In this case, 3.
 */
-
+/*
 resource "aws_iam_user" "demo" {
   count = 3
   name = "tuckerdemo"
@@ -18,7 +18,7 @@ resource "aws_iam_user" "demo" {
   count = 3
   name = "tuckerdemo.${count.index}"
 }
-
+*/
 /*
 If our users need unique names that do not start the same and end with a number, this method will not be appropriate without further customization.
 A list of unique usernames can be added to a variable in a separate file and then referenced in our resource block.
@@ -32,7 +32,7 @@ resource "aws_iam_user" "demo" {
   count = "${length(var.username)}"
   name = "${element(var.username,count.index )}"
 }
-
+/*
 /*
 If we wanted to have an output of the arn of all the user we create, we can do that with an output file.
 Create an output block for “user_arn”.
@@ -54,3 +54,4 @@ resource "aws_iam_user" "example" {
   name     = each.value
 }
 
+*/
