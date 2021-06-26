@@ -8,12 +8,12 @@ resource "aws_iam_user" "demo" {
   count = 3
   name = "tuckerdemo"
 }
-
+*/
 /*
 The problem with using count in this way is that all 3 of the users would have the same name, “tuckerdemo”.
 Using count.index after the name will give a distinct index number corresponding to each iteration of the resource block.
 */
-
+/*
 resource "aws_iam_user" "demo" {
   count = 3
   name = "tuckerdemo.${count.index}"
@@ -32,23 +32,23 @@ resource "aws_iam_user" "demo" {
   count = "${length(var.username)}"
   name = "${element(var.username,count.index )}"
 }
-/*
+
 /*
 If we wanted to have an output of the arn of all the user we create, we can do that with an output file.
 Create an output block for “user_arn”.
 The “*” in the value line will indicate to output the arn for all of the aws_iam_user’s.
 If you only want to output a specific user’s arn, change the “*” to that users index number in the list (0, 1, 2, etc.).
 */
-
+/*
 output "user_arn" {
   value = aws_iam_user.demo.*.arn
 }
-
+*/
 /*
 If a resource or module block includes a for_each argument whose value is a map or a set of strings, Terraform will create one instance for each member of that map or set.
 In this case we use it for a set of strings, made up of the usernames.
 */
-
+/*
 resource "aws_iam_user" "example" {
   for_each = toset(["tucker", "annie", "josh"])
   name     = each.value
